@@ -1,0 +1,421 @@
+<%- include('partials/header.ejs') %>
+ <!-- Start Breadcrumb Area  -->
+ <div class="axil-breadcrumb-area">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-8">
+                <div class="inner">
+                    <ul class="axil-breadcrumb">
+                        <li class="axil-breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="separator"></li>
+                        <li class="axil-breadcrumb-item active" aria-current="page">My Account</li>
+                    </ul>
+                    <h1 class="title">Dashboard</h1>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-4">
+                <div class="inner">
+                    <div style=" position: relative; " class="bradcrumb-thumb">
+                        <img style="height: 150px; width: 150px; border-radius: 50%; background-position: center; object-fit: cover;" src="<%=user.photo%>" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Breadcrumb Area  -->
+
+<div class="axil-dashboard-area axil-section-gap pb-0">
+    <div class="container">
+        <div class="axil-dashboard-warp">
+            <div class="axil-dashboard-author">
+                <div class="media">
+                    <div class="thumbnail"  >
+                        <div id="profile-update" class="border d-flex align-items-center justify-content-center" style="cursor: pointer; width: 50px; height: 50px; border-radius: 50%;">
+                                <%if(user.photo){%>
+                                 <img style=" object-fit: cover; width: 50px; height: 50px; border-radius: 50%; background-position: center;" src="<%=user.photo%>"   title="Profile Image" alt="Profile Picture"  >
+                                 
+                                <%}else{%>
+                                  <i class="fa-regular fa-user fa-2x"></i>
+                                <%}%>
+                        </div>
+                    </div>
+                    <form action="/updatephoto" class="file-form" method="post" enctype="multipart/form-data">
+                        <div class="form-group my-3">
+                            <input type="file"  name="filename" id="profile" style="display: none;" accept="image/*" required />
+                        </div>
+                    </form>
+                    <div class="media-body">
+                        <h5 class="title mb-0">Hello <%=user.fullname%></h5>
+                        <span class="joining-date">eTrade Member Since Sep 2023</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-3 col-md-4 ">
+                    <aside class="axil-dashboard-aside">
+                        <nav class="axil-dashboard-nav">
+                            <div class="nav nav-tabs account-active" role="tablist">
+                                <a class="nav-item nav-link active mb-1" data-bs-toggle="tab" href="#nav-dashboard" role="tab" aria-selected="true"><i class="fas fa-th-large"></i>Dashboard</a>
+                                <a class="nav-item nav-link mb-1" data-bs-toggle="tab" href="#nav-account" role="tab" aria-selected="false"><i class="fas fa-user"></i>Account Details</a>
+                                <a class="nav-item nav-link mb-1" data-bs-toggle="tab" href="#nav-address" role="tab" aria-selected="false"><i class="fas fa-home"></i>Addresses</a>
+                                <a class="nav-item nav-link mb-1" data-bs-toggle="tab" href="#nav-security" role="tab" aria-selected="false"><i class="fa-solid fa-key"></i>Security</a>
+                                <a class="nav-item nav-link mb-1" data-bs-toggle="tab" href="#nav-deactivate" role="tab" aria-selected="false"><i class="fa-solid fa-shield-halved"></i>Deactivate</a>
+                                <a class="nav-item nav-link" href="/logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+                            </div>
+                        </nav>
+                    </aside>
+                </div>
+                <div class="col-xl-9 col-md-8 account-tab ">
+                    <div class="tab-content">
+
+                        <div class="tab-pane fade show active" id="nav-dashboard" role="tabpanel">
+                            <div class="axil-dashboard-overview">
+                                <div class="welcome-text">Hello <%=user.fullname%> (not <span><%=user.fullname%>?</span> <a href="/logout">Log Out</a>)</div>
+                                <p>From your account dashboard you can view your recent orders, manage your shipping and billing addresses, and edit your password and account details.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="nav-address" role="tabpanel">
+                            <div class="axil-dashboard-address">
+                                <p class="notice-text ">The following addresses will be used on the checkout page by default.</p>
+                               <% if(user.address.length > 0){%>
+                               
+                                <div class="border  p-4 rounded" style="position: relative;">
+                                    
+                                    <a href="/addressdelete/<%=user.address.indexOf(user.address[0])%>" class="btn btn-secondary d-flex align-items-center justify-content-center" style="z-index: 99; position: absolute; right: -10px; width: 30px; border-radius: 50%; height: 30px; top: -10px;"  ><i class="fa-solid fa-xmark"></i></a>
+
+                                    <h6><%=user.address[0].username%></h6>
+                                    <p class="m-0"><strong>Address : </strong><%=user.address[0].street%>, <%=user.address[0].landmark%>, <%=user.address[0].town%>, <%=user.address[0].state%>, <%=user.address[0].country%></p>
+                                    <p class="m-0"><strong>Pin code : </strong>  <%=user.address[0].pincode%></p>
+                                    <p class="m-0"><strong>Mobile Number : </strong> <%=user.address[0].number%></p>
+                        
+                                </div>
+                                 
+                               <% }else{%>
+                                <form class="account-details-form " action="/useraddress" method="post">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Full Name</label>
+                                                <input type="text" class="form-control border" placeholder="Enter Your Name" name="username" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Flate No. OR Street</label>
+                                                <input type="text" class="form-control border" placeholder="Flate No OR Street" name="street" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>LandMark</label>
+                                                <input type="text" class="form-control border" placeholder="LandMark" name="landmark" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>City</label>
+                                                <input type="text" class="form-control border" placeholder="Town" name="town" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>State</label>
+                                                <input type="text" class="form-control border" placeholder="State" name="state" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Country</label>
+                                                <input type="text" class="form-control border" placeholder="Country" name="country" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Pin Code</label>
+                                                <input type="text" class="form-control border" placeholder="Pin Code" name="pincode" maxlength="6" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Phone Number</label>
+                                                <input type="tel" class="form-control border" placeholder="Phone Number" name="number" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <button name="submit" type="submit" id="submit" class="axil-btn btn-bg-primary">Save Address</button>
+
+                                </form>
+                                <% }%>
+                                
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="nav-account" role="tabpanel">
+                            <p>From your account dashboard you can view your Account,and Update your account details.</p>
+
+                            <div class="col-lg-9">
+                                <div class="axil-dashboard-account">
+                                    <form class="account-details-form" action="/updateuser" method="post">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Full Name</label>
+                                                    <input type="text" class="form-control border" value="<%=user.fullname%>" name="fullname">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Username</label>
+                                                    <input type="text" class="form-control user-name border" value="<%=user.username%>" name="username">
+                                                    <small class="username-suggestion" style="font-size: 12px;"></small>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Mobile Number</label>
+                                                    <input type="tel" class="form-control user-name border" value="<%=user.mobilenumber%>" placeholder="+91 4444 333 22 1" name="number">
+                                                    <small class="username-suggestion1" style="font-size: 12px;"></small>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex gap-3 align-items-center">
+                                            <label for="">Gender : </label>
+
+                                            <% if(user.gender){ %>
+                                                <% if(user.gender === "male" ){ %>
+                                                    <div class=" d-flex align-items-center gap-2">
+                                                        <input type="radio" value="male" name="gender" checked>
+                                                        <label class="p-0">Male</label>
+                                                    </div>
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <input type="radio" value="female" name="gender">
+                                                        <label class="p-0">Female </label>
+                                                    </div>
+                                                <% }else{ %>
+                                                    <div class=" d-flex align-items-center gap-2">
+                                                        <input type="radio" value="male" name="gender">
+                                                        <label class="p-0">Male</label>
+                                                    </div>
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <input type="radio" value="female" name="gender" checked>
+                                                        <label class="p-0">Female </label>
+                                                    </div>
+                                               <% } %>
+                             
+                                                <% }else{ %>
+                                                    <div class=" d-flex align-items-center gap-2">
+                                                        <input type="radio" value="male" name="gender">
+                                                        <label class="p-0">Male</label>
+                                                    </div>
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <input type="radio" value="female" name="gender">
+                                                        <label class="p-0">Female </label>
+                                                    </div>
+                                                <% } %>
+
+                                            
+                                        </div>
+                                        
+                                        <button name="submit" type="submit" id="submit" class="axil-btn btn-bg-primary mt-4">Update Info</button>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="nav-security" role="tabpanel">
+                            <div class="col-lg-9">
+                                <div class="axil-dashboard-account">
+                                    <p class="notice-text my-3">Password Change</p>
+
+                                    <form class="account-details-form password-change-form" action="/changepassword" method="post">
+                                            <div class="col-lg-6 w-100">
+                                                <div class="form-group">
+                                                    <label>Old Password</label>
+                                                    <input type="password" class="form-control border" placeholder="Old Password" name="oldpassword" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 w-100">
+                                                <div class="form-group">
+                                                    <label>New Password</label>
+                                                    <input type="password" class="form-control border" placeholder="New Password" name="newpassword" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 w-100">
+                                                <div class="form-group">
+                                                    <label>Confirm Password</label>
+                                                    <input type="password" class="form-control border" placeholder="Confirm Password" name="confirmpassword" required>
+                                                </div>
+                                            </div>
+                                            <button name="submit" type="submit" class="axil-btn btn-bg-primary change-password-btn">Change Password</button>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="nav-deactivate" role="tabpanel">
+                            <div class="col-lg-9">
+                                <div class="axil-dashboard-account">
+                                    <p class="notice-text my-2"><strong>Account Deactivate</strong></p>
+                                    <p>IF you have a moment, please let us know why you are deactivating </p>
+                                    <form class="account-details-form feedback" action="/deactivateaccount" method="post">
+                                        
+                                            <div class=" d-flex align-items-center">
+                                                <input type="radio" name="reasion" value="dont need any more">
+                                                <label>dont need any more</label>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <input type="radio" name="reasion" value="service was not good">
+                                                <label>Service was not so good </label>
+                                            </div>
+                                            <div class=" d-flex align-items-center">
+                                                <input type="radio" name="reasion" value="it's not what i was looking for">
+                                                <label>it's not what i was looking for</label>
+                                            </div>
+                                            <div class=" d-flex align-items-center">
+                                                <input type="radio" name="reasion" value="its a temporary deactivation">
+                                                <label>It's a temporary deactivation.</label>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <input type="radio" name="reasion" value="other">
+                                                <label>Other</label>
+                                            </div>
+                                            <div class="form-group mt-4">
+                                                <label>Other Notes (optional)</label>
+                                                <textarea id="notes" rows="2" placeholder="Please let us know,so we can imfrove it." name="notes"></textarea>
+                                            </div>
+                                            
+                                          
+                                            <button type="button" class="w-auto red-btn " data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                                Deactivate Account
+                                            </button>
+                                            
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticBackdropLabel">Hello, <%=user.username%></h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="form-group m-0">
+                                                                <input type="password" class="form-control border userpassword" placeholder="Enter Your Password"  name="password"required>
+                                                                <p>Please Enter Password To Continew.</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger w-auto deactivate">Deactivate Now</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+  <section id="paymentdiv2" style=" width: 100vw; z-index: 99990;  min-height: 100vh; display:none; align-items: center; justify-content: center; position: fixed; left: 0; top: 0; background-color: rgba(0, 0, 0, 0.45);">
+    <div class="d-flex align-items-center justify-content-center p-5 bg-light flex-column" style="border-radius: 10px; min-width: 300px;">
+        <div class="container1 p-0 m-0">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+          </div>
+      <div>
+        <h4 class="mt-3 text-dark text-center">Please Wait</h4>
+        <!-- <small class="text-muted">Don't Close OR Refresh The Window</small> -->
+      </div>
+    </div>
+  </section>
+
+<script>
+
+    document.querySelector(".deactivate").addEventListener("click",function(){
+document.getElementById("paymentdiv2").style.display="flex";
+        var reasion = document.querySelector('input[name="reasion"]:checked');
+        var notes =  document.querySelector('#notes');
+        // deactivate_otp.style.display="flex"
+            axios.post('/deactivateaccount', {
+                // reasion: document.querySelector('input[name="reasion"]:checked').value,
+                // notes:  document.querySelector('#notes').value,
+                password: document.querySelector(".userpassword").value
+            })
+            .then(function (response) {
+                // console.log(response);
+                if (response.data === "password wrong") {
+                    alert("password Not matched Try Again")
+                    document.getElementById("paymentdiv2").style.display="none";
+                    document.querySelector(".userpassword").value =""
+                }else{
+                    alert("account deleted successfuly")
+                    document.getElementById("paymentdiv2").style.display="none";
+                    window.location.reload()
+
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+           
+        // if (notes.value == false ) {
+        //     console.log("null")
+        // }else{
+        //     console.log("data hai")
+        // }
+        // if (reasion == null) {
+        //     console.log("null")
+        // }else{
+        //     console.log("data hai")
+        // }
+
+    })
+
+// document.querySelector(".change-password-btn").addEventListener("click",function(){
+//     var x = document.querySelector("input[name=newpassword]")
+//     var y = document.querySelector("input[name=confirmpassword]")
+//     if (x.value == y.value) {
+//         document.querySelector(".password-change-form").submit();
+//     }else{
+//         alert("password Not Matched")
+//     }
+// })
+
+
+    document.getElementById("profile-update").addEventListener("click",function(){
+        document.getElementById("profile").click()
+    })
+    document.getElementById("profile").addEventListener("change",function(){
+        document.querySelector(".file-form").submit()
+    })
+</script>
+<%- include('partials/subscription.ejs') %>
+<%- include('partials/support.ejs') %>
+<%- include('partials/footer.ejs') %>

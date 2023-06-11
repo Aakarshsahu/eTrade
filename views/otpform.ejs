@@ -1,0 +1,83 @@
+<%- include('partials/header.ejs') %>
+ <!-- Start Breadcrumb Area  -->
+
+<section>
+    <div class="axil-signin-area signin-form">
+
+      
+        <!-- End Header -->
+
+        <div class="row">
+            <div class="col-xl-4 col-lg-6">
+                <div class="axil-signin-banner bg_image bg_image--10">
+                    <h3 class="title">We Offer the Best Products</h3>
+                </div>
+            </div>
+            <div class="col-lg-6 offset-xl-2">
+                <div class="axil-signin-form-wrap mt-5">
+                    <div class="axil-signin-form">
+                        <h3 class="title">Reset Password</h3>
+                        <p class="b2 mb--55">Enter the otp which is sent to your Email id to reset your password.</p>
+                        <form class="singin-form mt-5" id="myform" action="/forget/<%=user1._id%>" method="post">
+                            <div class="form-group">
+                                <label>OTP</label>
+                                <input type="text" class="form-control border" maxlength="6" name="otp" placeholder="Enter Otp Here" required>
+                            </div>
+                            <div class="form-group">
+                                <label>New Password</label>
+                                <input type="password" class="form-control border newpassword" name="password" placeholder="New Password" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Confirm Password</label>
+                                <input type="password" class="form-control border" name="confirmpassword" placeholder="Confirm Password" required>
+                            </div>
+                            
+                            <div class="form-group d-flex align-items-center justify-content-between">
+                                <button type="button" class="axil-btn btn-bg-primary submit-btn">Reset Password</button>
+                                <button class="forgot-btn w-auto bg-white otp-resend" type="button">Resend Otp</button>
+                            </div>           
+                            <input type="hidden"  value="<%=user1._id%>" id="ema">              
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<script>
+    
+    document.querySelector(".submit-btn").addEventListener("click",function(){
+        var x = document.querySelector("input[name=password]")
+        var y = document.querySelector("input[name=confirmpassword]")
+        if (x.value === y.value) {
+            document.getElementById("myform").submit()
+        }else{
+            alert("Password Not Matched")
+        }
+
+    })
+
+
+    document.querySelector(".otp-resend").addEventListener("click",function(){
+ var x = document.querySelector("#ema")
+ document.querySelector(".otp-resend").textContent="Please Wait"
+ document.querySelector(".otp-resend").disabled = true
+ axios.get(`/resendotp/${x.value}`).then(function(res){
+    document.querySelector(".otp-resend").textContent="Otp Sent Successfully"
+    var timeleft = 10;
+    var downloadTimer = setInterval(function(){
+    if(timeleft <= 0){
+        clearInterval(downloadTimer);
+        document.querySelector(".otp-resend").textContent="Resend Otp"
+        document.querySelector(".otp-resend").disabled = false
+    }else{
+        document.querySelector(".otp-resend").textContent="Resend Otp In : " + timeleft
+    }
+    timeleft -= 1;
+        }, 1000);
+ })
+})
+</script>
+<%- include('partials/footer.ejs') %>

@@ -1,0 +1,195 @@
+<%- include('partials/header.ejs') %>
+
+<div class="axil-single-product-area bg-color-white">
+    <div class="single-product-thumb axil-section-gap pb--20 pb_sm--0 bg-vista-white">
+        <div class="container">
+            <div class="row row--25">
+                <div class="col-lg-6 mb--40">
+                    <div class="h-100">
+                        <div class="position-sticky sticky-top">
+                            <div class="row row--10">
+                                <div class="col-6 mb--20">
+                                    <div class="single-product-thumbnail axil-product thumbnail-grid">
+                                        <div class="thumbnail">
+                                            <img class="img-fluid" src="<%=product.photo[0]%>">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End .col -->
+                                <div class="col-6 mb--20">
+                                    <div class="single-product-thumbnail axil-product thumbnail-grid">
+                                        <div class="thumbnail">
+                                            <img class="img-fluid" src="<%=product.photo[0]%>">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End .col -->
+                                <div class="col-6 mb--20">
+                                    <div class="single-product-thumbnail axil-product thumbnail-grid">
+                                        <div class="thumbnail">
+                                            <img class="img-fluid" src="<%=product.photo[0]%>">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- End .col -->
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 mb--40 " style="overflow-x: hidden;">
+                    <div class="h-100">
+                        <div class="position-sticky sticky-top" style="z-index: 99;">
+                            <div class="single-product-content">
+                                <div class="inner">
+                                    <div class="d-flex justify-content-between gap-5">
+                                        <h2 class="product-title"><%=product.productname%></h2>
+                                       <% if(user){%>
+                                        <a href="/wishlist/<%=product._id%>" ><button  class="wishlist-btn <%=user.wishlist.indexOf(product._id) == -1 ? '' :'bg-danger text-white' %>" title="<%=user.wishlist.indexOf(product._id) == -1 ? '' :'Added To WishList' %>" ><i class="fa-regular fa-heart "></i></button></a>
+                                       <% }else{%>
+                                        <a href="/wishlist/<%=product._id%>" ><button  class="wishlist-btn " title="WishList" ><i class="fa-regular fa-heart "></i></button></a>
+
+                                        <%}%>
+
+                                    </div>
+                                    <div class="d-flex gap-4">
+                                        <span class="price-amount">$<%=product.currentprice%></span>
+                                    <span class="price-amount text-decoration-line-through text-muted">$<%=product.oldprice%></span>
+                                    </div>
+                                    <!-- <div class="product-rating">
+                                        <div class="star-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <div class="review-link">
+                                            <a href="#">(<span>2</span> customer reviews)</a>
+                                        </div>
+                                    </div> -->
+                                    <hr>
+                                    <ul class="product-meta">
+                                        <li><i class="fa-solid fa-check"></i>In stock</li>
+                                        <li><i class="fa-solid fa-check"></i>Free delivery available</li>
+                                        <!-- <li><i class="fa-solid fa-check"></i>Sales 30% Off Use Code: MOTIVE30</li> -->
+                                    </ul>
+                                    <p class="description mt-3">In ornare lorem ut est dapibus, ut tincidunt nisi pretium. Integer ante est, hendrerit in rutrum quis, elementum eget magna. Pellentesque sagittis dictum libero, eu dignissim tellus.</p>
+
+                                    <div class="product-variations-wrapper">
+
+                                        <!-- Start Product Variation  -->
+                                        <!-- <div class="product-variation">
+                                            <h6 class="title">Colors:</h6>
+                                            <div class="color-variant-wrapper">
+                                                <ul class="color-variant">
+                                                    <li class="color-extra-01 active"><span><span class="color"></span></span>
+                                                    </li>
+                                                    <li class="color-extra-02"><span><span class="color"></span></span>
+                                                    </li>
+                                                    <li class="color-extra-03"><span><span class="color"></span></span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div> -->
+                                        <!-- End Product Variation  -->
+
+                                        <!-- Start Product Variation  -->
+                                        <!-- <div class="product-variation product-size-variation">
+                                            <h6 class="title">Size:</h6>
+                                            <ul class="range-variant">
+                                                <li>xs</li>
+                                                <li>s</li>
+                                                <li>m</li>
+                                                <li>l</li>
+                                                <li>xl</li>
+                                            </ul>
+                                        </div> -->
+                                        <!-- End Product Variation  -->
+
+                                    </div>
+
+                                    <!-- Start Product Action Wrapper  -->
+                                    <div class="product-action-wrapper d-flex gap-3 d-flex-center">
+                                        
+                                        <!-- Start Product Action  -->
+                                       <% if(user){%>
+                                            <a href="/cart/<%=product._id%>" class="axil-btn  add-to-cart"><i class="fa-solid fa-cart-plus"></i> <%=user.cart.indexOf(product._id) == -1 ? 'Add To Cart' :'Remove From Cart' %></a>
+                                        <%}else{%>
+                                            <a href="/cart/<%=product._id%>" class="axil-btn  add-to-cart"><i class="fa-solid fa-cart-plus"></i> Add To Cart</a>
+                                        <%}%>
+                                            <a href="/checkout/<%=product._id%>" class="axil-btn btn-bg-primary     "><i class="fa-solid fa-bolt"></i> Buy Now</a>
+                                        <!-- End Product Action  -->
+
+                                    </div>
+                                    <!-- End Product Action Wrapper  -->
+
+                                    <div class="product-desc-wrapper mt-4 pt_sm--60">
+                                        <h4 class="primary-color  desc-heading">Description</h4>
+                                        <div class="single-desc mb--30">
+                                            <h5 class="title">Specifications:</h5>
+                                            <p>We’ve created a full-stack structure for our working workflow processes, were from the funny the century initial all the made, have spare to negatives. But the structure was from the funny the century rather,
+                                                initial all the made, have spare to negatives.</p>
+                                        </div>
+                                        <div class="single-desc mb--5">
+                                            <h5 class="title">Care &amp; Maintenance:</h5>
+                                            <p>Use warm water to describe us as a product team that creates amazing UI/UX experiences, by crafting top-notch user experience.</p>
+                                        </div>
+                                        <ul class="pro-des-features pro-desc-style-two">
+                                            <li class="single-features">
+                                                <div class="icon">
+                                                    <img src="https://new.axilthemes.com/demo/template/etrade/assets/images/product/product-thumb/icon-3.png" alt="icon">
+                                                </div>
+                                                Easy Returns
+                                            </li>
+                                            <li class="single-features">
+                                                <div class="icon">
+                                                    <img src="https://new.axilthemes.com/demo/template/etrade/assets/images/product/product-thumb/icon-2.png" alt="icon">
+                                                </div>
+                                                Quality Service
+                                            </li>
+                                            <li class="single-features">
+                                                <div class="icon">
+                                                    <img src="	https://new.axilthemes.com/demo/template/etrade/assets/images/product/product-thumb/icon-1.png" alt="icon">
+                                                </div>
+                                                Original Product
+                                            </li>
+                                        </ul>
+                                        <!-- End .pro-des-features -->
+                                         <div class="product-rating " style="max-height: 300px; overflow: auto; ">
+                                            <strong>Customer Reviews : <%=product.reviewid.length%></strong>
+                                            <%product.reviewid.forEach((elem)=>{ %>
+                                                <div class=" p-1  mt-1 bg-light d-flex gap-2 align-items-center " style="position: relative;" >
+                                                    <img src="../images/uploads/<%=elem.userid[0].photo%>" alt="" style="width: 50px; height: 50px;">
+                                                    <div>
+                                                        <strong><%=elem.userid[0].fullname%></strong>
+                                                        <p><%=elem.review%></p>
+                                                    </div>
+                                                 <% if(user){%>
+                                                    <% if(user.review.indexOf(elem._id == 1)){%>
+                                                        <a href="/reviewdelete/<%=elem.productid[0]._id%>/<%=elem._id%>" title="Delete Review" class="btn btn-secondary d-flex align-items-center justify-content-center" style="z-index: 99; position: absolute; right:0; width: 30px; border-radius: 50%; height: 30px; top: -10px;"  ><i class="fa-solid fa-xmark"></i></a>
+                                                       <% }%>
+                                                  <%}%>
+                                                </div>
+                                            <%})%>
+                                         </div>
+                                    </div>
+                                    <!-- End .product-desc-wrapper -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End .single-product-thumb -->
+    
+
+</div>
+
+<%- include('partials/subscription.ejs') %>
+<%- include('partials/support.ejs') %>
+<%- include('partials/footer.ejs') %>

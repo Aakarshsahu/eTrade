@@ -1,0 +1,65 @@
+<%- include('partials/header.ejs') %>
+ <!-- Start Breadcrumb Area  -->
+
+<section>
+    <div class="axil-signin-area signin-form">
+
+      
+        <!-- End Header -->
+
+        <div class="row">
+            <div class="col-xl-4 col-lg-6">
+                <div class="axil-signin-banner bg_image bg_image--9">
+                    <h3 class="title">We Offer the Best Products</h3>
+                </div>
+            </div>
+            <div class="col-lg-6 offset-xl-2">
+                
+                <div class="singin-header-btn d-flex gap-3 justify-content-center my-5 align-items-center">
+                    <p>Already a member?</p>
+                    <a href="/login"><button class="axil-btn btn-bg-secondary sign-up-btn">Sign In</button></a>
+                </div>
+                <div class="axil-signin-form-wrap">
+                    <div class="axil-signin-form">
+                        <h3 class="title">Forget Password?</h3>
+                        <p class="b2 mb--55">Enter the email address you used when you joined and we’ll send you otp to reset your password.</p>
+                        <form class="singin-form mt-5" action="/forget" method="post">
+                            <div class="form-group">
+                                <label>Email OR Phone No.</label>
+                                <input type="text" class="form-control border user-name" name="username" placeholder="annie@example.com">
+                                <small class="username-suggestion text-start" style="font-size: 12px;"></small>
+                            </div>
+                            <div class="form-group d-flex align-items-center justify-content-between">
+                                <button type="submit" class="axil-btn btn-bg-primary submit-btn">Find Account</button>
+                            </div>                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<script>
+    document.querySelector(".user-name").addEventListener("change",function(){
+        var small = document.querySelector(".username-suggestion")
+       if(this.value.trim().length >0){
+        axios.get(`/check/${this.value}`).then(function(res){
+            if (res.data == null) {
+                small.style.display="block"
+                small.style.color="red";
+                small.textContent = "Account Not Found"
+            }else{
+                small.style.display="block"
+                small.style.color="green";
+                small.textContent = "Account Found"
+
+            }
+        })
+       }else{
+        small.style.display="none"
+       }
+})
+</script>
+
+<%- include('partials/footer.ejs') %>

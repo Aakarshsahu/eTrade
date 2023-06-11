@@ -1,0 +1,73 @@
+<%- include('partials/header.ejs') %>
+<div class="axil-breadcrumb-area">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-8">
+                <div class="inner">
+                    <ul class="axil-breadcrumb">
+                        <li class="axil-breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="separator"></li>
+                        <li class="axil-breadcrumb-item active" aria-current="page">Wishlist</li>
+                    </ul>
+                    <h1 class="title">My WishList</h1>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-4">
+                <div class="inner">
+                    <div class="bradcrumb-thumb">
+                        <img src="https://new.axilthemes.com/demo/template/etrade/assets/images/product/product-45.png" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ------------------------------------- -->
+<div class="axil-most-sold-product axil-section-gap pb-0">
+    <div class="container">
+        <%if(loginuser.wishlist.length >= 1){%>
+        <div class="product-area ">
+                <div class="row row-cols-xl-2 row-cols-1 row--15">
+                    <%loginuser.wishlist.forEach(function(elem){%>
+                    <div class="col w-100">
+                        <div class="axil-product-list">
+                            <a href="/wishlist/<%=elem._id%>" class="btn btn-secondary d-flex align-items-center justify-content-center" style="z-index: 99; position: absolute; right: -10px; width: 30px; border-radius: 50%; height: 30px; top: -10px;"  ><i class="fa-solid fa-xmark"></i></a>
+                            <div class="thumbnail">
+                                <a href="/view/<%=elem._id%>">
+                                    <img   src="../images/uploads/<%=elem.photo[0].filename%>" alt="<%=elem.productname%>" class="sal-animate">
+                                </a>
+                            </div>
+                            <div class="product-content">
+                                <div class="product-rating">
+                                    
+                                    <span class="rating-number my-2"><span>100+</span> Reviews</span>
+                                </div>
+                                <h6 class="product-title"><a href="/view/<%=elem._id%>" ><%=elem.productname%></a></h6>
+                                <div class="product-price-variant">
+                                    <span class="price current-price">$<%=elem.currentprice%></span>
+                                    <span class="price old-price text-decoration-line-through fw-normal mx-2">$<%=elem.oldprice%></span>
+                                </div>
+                                <div class="product-cart">
+                                   <% if(loginuser.cart.indexOf(elem._id) == -1){%>
+                                    <a href="/cart/<%=elem._id%>" class="cart-btn"><i class="fa-solid fa-cart-shopping"></i></a>
+                                   <% }%>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%})%>
+                </div>
+        </div>
+        <%}else{%>
+            <div class="container flex-column d-flex align-items-center justify-content-center">
+                <img src="../images/download.png" style="height: 250px; " alt="">
+                <p class="my-4 h4" >No Items</p>
+            </div>
+
+        <%}%>
+    </div>
+</div>
+<%- include('partials/subscription.ejs') %>
+<%- include('partials/support.ejs') %>
+<%- include('partials/footer.ejs') %>

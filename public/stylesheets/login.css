@@ -1,0 +1,114 @@
+
+
+.axil-signin-area {
+
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+
+.signin-header {
+ 
+    padding: 40px 100px;
+    z-index: 1;
+}
+.signin-header .singin-header-btn {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+
+
+button.axil-btn.btn-bg-secondary:hover ,a.axil-btn.btn-bg-secondary:hover{
+    background: transparent;
+    color: var(--color-secondary);
+}
+a.axil-btn.btn-bg-secondary, button.axil-btn.btn-bg-secondary {
+    background-color: var(--color-secondary);
+    border: 2px solid var(--color-secondary);
+    width: fit-content;
+    color: var(--color-white);
+}
+
+
+
+.axil-signin-form {
+    max-width: 450px;
+    width: 100%;
+    padding: 30px;
+}
+.axil-signin-form .singin-form {
+    padding-bottom: 30px;
+}
+.axil-signin-form .form-group {
+    margin-bottom: 35px;
+}
+
+.axil-signin-form .forgot-btn {
+    font-size: 14px;
+    text-decoration: none;
+    color: var(--color-body);
+    transition: var(--transition);
+}
+.axil-signin-form .forgot-btn:hover{
+    color: var(--color-primary);
+
+}
+
+
+.bg_image--9 {
+    background-image: url("https://new.axilthemes.com/demo/template/etrade/assets/images/bg/bg-image-9.jpg");
+}
+.bg_image, .bgImagePosition {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+.axil-signin-form-wrap {
+    width: 100%;
+    height: fit-content;
+    /* height: calc(100vh - 180px); */
+    overflow-y: auto;
+    display: flex;
+}
+
+.axil-signin-banner {
+    min-height: 900px;
+    height: 100vh;
+    padding: 200px 50px 0 100px;
+}
+.bg_image--10 {
+    background-image: url("https://new.axilthemes.com/demo/template/etrade/assets/images/bg/bg-image-10.jpg");
+}
+
+
+.signup-form{
+display: none;
+}
+
+
+@media only screen and (max-width: 991px){
+    .axil-signin-banner{
+        display: none;
+    }
+    .axil-signin-form-wrap {
+        justify-content: center;
+        text-align: center;
+    }
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px){
+
+    .axil-signin-banner {
+        margin-right: 50px;
+    }
+}
+
+@media only screen and (max-width: 991px){
+
+    .signin-header {
+        padding: 40px 30px;
+    }
+}

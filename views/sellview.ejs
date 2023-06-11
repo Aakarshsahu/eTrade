@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+</head>
+<body>
+    <section>
+        <div class="container py-5" >
+                    <div class="border p-3 mt-3 d-flex justify-content-between" style="border-radius: 10px;">
+                        <div>
+                            <h4><%=product.address[0].username%></h4>
+                            <p class="text-danger"><%=product.price%></p>
+                            <div class="d-flex gap-5 flex-wrap">
+                                <p class="m-0 "><strong>address : </strong><%=product.address[0].flate_no%>, <%=product.address[0].area%>, <%=product.address[0].city%>, <%=product.address[0].state%>, <%=product.address[0].country%></p>
+                                <p class="m-0 mx-5"><strong>PinCode : </strong><%=product.address[0].pincode%></p>
+                            </div>
+                            <p class="m-0"><strong>phone : </strong><a href="tel:+919039495825"><%=product.address[0].number%></a></p>
+                            <div class="d-flex gap-5">
+                                <p class="m-0"><strong>payment Mode :</strong> <%=product.paymentmode%></p>
+                                <p class="m-0 mx-5 <%=product.paymentstatus == 'Success' ? 'text-success' : ' text-danger'%>"><strong class="text-dark">payment Status :</strong> <%=product.paymentstatus%></p>
+                            </div>
+                            <p class="m-0"><strong>dilevery status :</strong> <%=product.deliverystatus == 'approved' ? 'pending' : 'delivered'%></p>
+                        </div>
+                            <div class="border">
+                                <form action="/userverify/<%=product._id%>/<%=product.userid[0]%>/<%=product.productid[0]._id%>" method="post" class="mt-4 d-flex flex-column gap-2 px-3">
+                                    <input type="text" required name="orderotp" maxlength="6" minlength="6" placeholder="enter 6 digit otp">
+                                    <button class="btn btn-secondary">submit</button>
+                                    <button class="btn btn-link orderotp" type="button" >Resend Otp</button>
+
+                                </form>
+                            </div>
+                    </div>
+
+                <input type="text" name="" id="ema1" value="<%=product.userid[0]%>" style="display: none;">
+                <input type="text" name="" id="ema" value="<%=product._id%>" style="display: none;">
+
+        </div>
+
+
+    </section>
+
+<script>
+    document.querySelector(".orderotp").addEventListener("click",function(){
+        var x = document.querySelector("#ema")
+        var y = document.querySelector("#ema1")
+        document.querySelector(".orderotp").textContent="Please Wait!"
+        document.querySelector(".orderotp").disabled = true
+        axios.get(`/orderotp/${x.value}/${y.value}`).then(function(res){
+            document.querySelector(".orderotp").textContent="OTP Sent Successfuly"
+            var timeleft = 10;
+             var downloadTimer = setInterval(function(){
+                if(timeleft <= 0){
+                    clearInterval(downloadTimer);
+                    document.querySelector(".orderotp").textContent="RESEND OTP"
+                    document.querySelector(".orderotp").disabled = false
+                }else{
+                    document.querySelector(".orderotp").textContent="RESEND OTP IN : " + timeleft
+                }
+            timeleft -= 1;
+            }, 1000);
+        })
+    })
+</script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<%- include('partials/header.ejs') %>
+
+
+    <!-- End .single-product-thumb -->
+    <!-- Start Checkout Area  -->
+    <div class="axil-checkout-area pt-5" >
+        <div class="container">
+            <form action="/buy/<%=product._id%>" id="myForm" method="post">
+                <div class="row">
+                    <div class="col-lg-6">
+                        
+                        <div class="axil-checkout-billing">
+                            <h4 class="title mb--40"><strong>Shiping details</strong></h4>
+                            <%if(user){%>
+                                <% if(user.address.length > 0){%>
+                                    <div class="form-group border">
+                                        <label>Full Name</label>
+                                        <input type="text" placeholder="Enter Your Name" name="username" value="<%=user.address[0].username%>" >
+                                    </div>                           
+                                    <div class="form-group ">
+                                        <label>Street Address <span>*</span></label>
+                                        <input type="text" id="address1" class="mb--15 border" placeholder="House number and street name" name="street" value="<%=user.address[0].street%>">
+                                        <input type="text" class="border" id="address2" placeholder="LandMark" name="landmark" value="<%=user.address[0].landmark%>">
+                                    </div>
+                                    <div class="form-group border" >
+                                        <label>Town/ City <span>*</span></label>
+                                        <input type="text" id="town" placeholder="Town" name="town" value="<%=user.address[0].town%>">
+                                    </div>
+                                    <div class="form-group border">
+                                        <label>State</label>
+                                        <input type="text" id="country" placeholder="State" name="state" value="<%=user.address[0].state%>">
+                                    </div>
+                                    <div class="form-group border">
+                                        <label>Country</label>
+                                        <input type="text" id="country" placeholder="Country" name="country" value="<%=user.address[0].country%>">
+                                    </div>
+                                    
+                                    <div class="form-group border">
+                                        <label>Pin Code <span>*</span></label>
+                                        <input type="text" id="phone" placeholder="Pin Code" name="pincode" value="<%=user.address[0].pincode%>">
+                                    </div>
+                                    <div class="form-group border">
+                                        <label>Phone <span>*</span></label>
+                                        <input type="tel" id="phone" placeholder="Phone" name="phone" value="<%=user.address[0].number%>">
+                                    </div>
+                               <% }else{%>
+                                <div class="form-group border">
+                                    <label>Full Name</label>
+                                    <input type="text" placeholder="Enter Your Name" name="username"  required>
+                                </div>                           
+                                <div class="form-group ">
+                                    <label>Street Address <span>*</span></label>
+                                    <input type="text" id="address1" class="mb--15 border" placeholder="House number and street name" name="street"  required>
+                                    <input type="text" class="border" id="address2" placeholder="LandMark" name="landmark">
+                                </div>
+                                <div class="form-group border" >
+                                    <label>Town/ City <span>*</span></label>
+                                    <input type="text" id="town" placeholder="Town" name="town" required>
+                                </div>
+                                <div class="form-group border">
+                                    <label>State</label>
+                                    <input type="text" id="country" placeholder="State" name="state" required>
+                                </div>
+                                <div class="form-group border">
+                                    <label>Country</label>
+                                    <input type="text" id="country" placeholder="Country" name="country" required>
+                                </div>
+                                
+                                <div class="form-group border">
+                                    <label>Pin Code <span>*</span></label>
+                                    <input type="text" id="phone" placeholder="Pin Code" name="pincode" required maxlength="6">
+                                </div>
+                                <div class="form-group border">
+                                    <label>Phone <span>*</span></label>
+                                    <input type="tel" id="phone" placeholder="Phone Number" name="number" required>
+                                </div>
+                              <% }%>
+                           <% }else{%>
+                            <div class="form-group border">
+                                <label>Full Name</label>
+                                <input type="text" placeholder="Enter Your Name" name="username"  required>
+                            </div>                           
+                            <div class="form-group ">
+                                <label>Street Address <span>*</span></label>
+                                <input type="text" id="address1" class="mb--15 border" placeholder="House number and street name" name="flateno"  required>
+                                <input type="text" class="border" id="address2" placeholder="LandMark" name="landmark">
+                            </div>
+                            <div class="form-group border" >
+                                <label>Town/ City <span>*</span></label>
+                                <input type="text" id="town" placeholder="Town" name="town" required>
+                            </div>
+                            <div class="form-group border">
+                                <label>State</label>
+                                <input type="text" id="country" placeholder="State" name="state" required>
+                            </div>
+                            <div class="form-group border">
+                                <label>Country</label>
+                                <input type="text" id="country" placeholder="Country" name="country" required>
+                            </div>
+                            
+                            <div class="form-group border">
+                                <label>Pin Code <span>*</span></label>
+                                <input type="text" id="phone" placeholder="Pin Code" name="pincode" required maxlength="6">
+                            </div>
+                            <div class="form-group border">
+                                <label>Phone <span>*</span></label>
+                                <input type="tel" id="phone" placeholder="Phone" name="phone" required>
+                            </div>
+                           <%}%>
+                           
+                            <!-- <div class="form-group input-group">
+                                <input type="checkbox" id="checkbox1" name="account-create">
+                                <label for="checkbox1">Save For Leter</label>
+                            </div> -->
+                            
+                            <div class="form-group">
+                                <label>Other Notes (optional)</label>
+                                <textarea id="notes" rows="2" placeholder="Notes about your order, e.g. speacial notes for delivery." name="notes"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="axil-order-summery order-checkout-summery">
+                            <h5 class="title mb--20"><strong>Your Order</strong></h5>
+                            <div class="summery-table-wrap">
+                                <table class="table summery-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="order-product">
+                                            <td><%=product.productname%> </td>
+                                            <td>$<%=product.currentprice%></td>
+                                        </tr>
+                                       
+                                        <tr class="order-subtotal">
+                                            <td>Subtotal</td>
+                                            <td>$<%=product.currentprice%></td>
+                                        </tr>
+                                        
+                                        <tr class="order-total">
+                                            <td>Total</td>
+                                            <td class="order-total-amount">$<%=product.currentprice%></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="order-payment-method">
+                                
+                                <div class="single-payment">
+                                    <div class="input-group">
+                                        <input type="radio" name="payment" value="cod" class="radio1" >
+                                        <label for="radio">Cash on delivery</label>
+                                    </div>
+                                    <p>Pay with cash upon delivery.</p>
+                                </div>
+                                <div class="single-payment">
+                                    <div class="input-group align-items-center">
+                                        <input type="radio" name="payment" value="online" >
+                                        <label for="radio">Online</label>
+                                    </div>
+                                    <p > you can pay with your credit card Dabit Card or UPI</p>
+                                </div>
+                            </div>
+                            <button type="button" class="axil-btn btn-bg-primary checkout-btn" >Buy Now</button>
+                            <!-- <button type="button" class="axil-btn btn-bg-primary checkout-btn" id="rzp-button1" >online Now</button> -->
+                        </div>
+                    </div>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+    <input type="hidden" value="<%=product.currentprice%>" id="productprice">
+    <!-- End Checkout Area  -->
+
+</div>
+
+    <section id="paymentdiv" style=" width: 100vw; z-index: 99990;  min-height: 100vh; display:none; align-items: center; justify-content: center; position: fixed; left: 0; top: 0; background-color: rgba(0, 0, 0, 0.45);">
+    <div class="d-flex align-items-center justify-content-center bg-light p-5 flex-column" style="border-radius: 10px; min-width: 300px;">
+        <div class="check-container">
+            <div class="check-background">
+                <svg viewBox="0 0 65 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 25L27.3077 44L58.5 7" stroke="white" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+            <div class="check-shadow"></div>
+        </div>
+      <div>
+        <h1 class="mt-3 text-success text-center">success</h1>
+        <small>PLEASE WAIT !</small>
+        <small class="text-muted">Don't Close OR Refresh The Window</small>
+      </div>
+    </div>
+    </section>
+  <section id="paymentdiv2" style=" width: 100vw; z-index: 99990;  min-height: 100vh; display:none; align-items: center; justify-content: center; position: fixed; left: 0; top: 0; background-color: rgba(0, 0, 0, 0.45);">
+    <div class="d-flex align-items-center justify-content-center p-5 bg-light flex-column" style="border-radius: 10px; min-width: 300px;">
+        <div class="container1 p-0 m-0">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+          </div>
+      <div>
+        <h1 class="mt-3 text-dark text-center">Please Wait</h1>
+
+        
+        <small class="text-muted">Don't Close OR Refresh The Window</small>
+      </div>
+    </div>
+  </section>
+
+
+<!-- Modal -->
+
+
+  <!-- ------------------------scripts -->
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script>
+
+
+
+
+// ----
+
+const form = document.getElementById('myForm');
+
+
+    document.querySelector(".checkout-btn").addEventListener("click",function(){
+        const paymentType = document.querySelector('input[name="payment"]:checked').value;
+        if (paymentType === 'cod') {
+    var r = confirm("confirm this order")
+    if (r == true) {
+      form.submit();
+      document.getElementById("paymentdiv2").style.display="flex";
+    }
+    } else{
+    rzp1.open();
+//   e.preventDefault();
+    }
+    })
+
+
+
+var price = document.getElementById("productprice")
+
+var orderId ;
+$(document).ready(function(){
+  var settings = {
+"url": `/create/orderId/${price.value}`,
+"method": "POST",
+"timeout": 0,
+"headers": {
+  "Content-Type": "application/json"
+},
+"data": JSON.stringify({
+  "amount": price.value
+}),
+};
+
+//creates new orderId everytime
+$.ajax(settings).done(function (response) {
+// console.log(response.amount)
+// price=response.amount;
+// console.log(price)
+orderId=response.Id;
+$("button").show();
+});
+});
+
+var options = {
+  "key": "rzp_test_kNNGbyOiNhCZYG", // Enter the Key ID generated from the Dashboard
+  "amount": price.value * "100", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+  "currency": "INR",
+  "name": "eTrade",
+  "description": "Test Transaction",
+  "image": "https://new.axilthemes.com/demo/template/etrade/assets/images/logo/logo.png",
+  "order_id": orderId, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+  "handler": function (response){
+      // alert(response.razorpay_payment_id);
+      // alert(response.razorpay_order_id);
+      // alert(response.razorpay_signature);
+
+      var settings = {
+"url": "/api/payment/verify",
+"method": "POST",
+"timeout": 0,
+"headers": {
+  "Content-Type": "application/json"
+},
+"data": JSON.stringify({response}),
+}
+
+$.ajax(settings).done((req,res)=>{
+if(signatureIsValid=true){
+  // alert("Payment successful PLEASE WAIT ! Please do not refress the page");
+  document.getElementById("paymentdiv").style.display="flex";
+  form.submit();
+}else{
+  alert("payment failed")
+}
+})
+  },
+  "prefill": {
+      "name": "Gaurav Kumar",
+      "email": "gaurav.kumar@example.com",
+      "contact": "9000090000"
+  },
+  "notes": {
+      "address": "eTrade Corporate Office"
+  },
+  "theme": {
+      "color": "#3399cc"
+  }
+};
+var rzp1 = new Razorpay(options);
+rzp1.on('payment.failed', function (response){
+      alert(response.error.code);
+      alert(response.error.description);
+      alert(response.error.source);
+      alert(response.error.step);
+      alert(response.error.reason);
+      alert(response.error.metadata.order_id);
+      alert(response.error.metadata.payment_id);
+});
+// document.getElementById('rzp-button1').onclick = function(e){
+//   rzp1.open();
+//   e.preventDefault();
+// }
+
+</script>
+<%- include('partials/subscription.ejs') %>
+<%- include('partials/support.ejs') %>
+<%- include('partials/footer.ejs') %>

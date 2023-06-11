@@ -1,0 +1,228 @@
+<%- include('partials/header.ejs') %>
+<div class="axil-breadcrumb-area">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-8">
+                <div class="inner">
+                    <ul class="axil-breadcrumb">
+                        <li class="axil-breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="separator"></li>
+                        <li class="axil-breadcrumb-item active" aria-current="page">Shop</li>
+                    </ul>
+                    <h1 class="title">Explore All Products</h1>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-4">
+                <div class="inner">
+                    <div class="bradcrumb-thumb">
+                        <img src="https://new.axilthemes.com/demo/template/etrade/assets/images/product/product-45.png" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section id="shoping">
+    <!-- search bar------------------------------- -->
+    <div class="container search-bar" >
+        <div id="myDropdown" class="dropdown-content">
+            <form action="/search" method="post" class="h-100 bg-dark d-flex">
+                <input type="text"  name="search"  placeholder="What Are You Looking For?" id="myInput" onkeyup="filterFunction()" autocomplete="off">
+                <div id="search-content" class="bg-light py-0">
+                    <%search.forEach(function(elem){ %>
+                            <a href="/view/<%=elem._id%>" ><%=elem.productname%></a>
+                    <%})%>
+                    <!-- <a href="/smartphone" class="d-flex gap-3 align-items-center"> <i class="fa-solid fa-mobile" style="font-size: 18px;"></i> Mobile (<%=smartphone.length%>)</a>
+                    <a href="/laptop" class="d-flex gap-3 align-items-center"> <i class="fa-solid fa-laptop" style="font-size: 18px;"></i> Laptop (<%=laptop.length%>)</a> -->
+                </div>
+                <button class="search-btn btn btn-primary d-flex gap-2 justify-content-center align-items-center" style="width: 20%; border-radius: 0 ; font-size: 18px;"><i class="fa-solid fa-magnifying-glass"></i><strong class="search-strong">Search</strong></button>
+               
+            </form>
+        </div>
+    </div>
+   <!-- Start Categorie Area  -->
+   <div class="axil-categorie-area bg-color-white axil-section-gapcommon">
+    <div class="container ">
+        <div class="section-title-wrapper">
+            <span class="title-highlighter browse highlighter-secondary"> <i class="fa-solid fa-tags"></i> Categories</span>
+            <h2 class="title">Browse by Category</h2>
+        </div>
+        <div class="categrie-product-activation my-5 slick-layout-wrapper--15 axil-slick-arrow arrow-top-slide slick-initialized slick-slider ">
+
+        <div class="slick-list draggable">
+            <div class="slick-track d-flex flex-wrap gap-3" >
+                <div class="slick-single-layout slick-slide slick-cloned m-auto" tabindex="-1" style="width: 160px;" data-slick-index="-6" aria-hidden="true">
+                <div class="categrie-product sal-animate" data-sal="zoom-out" data-sal-delay="800" data-sal-duration="500">
+                    <a href="/shop/smartphone" tabindex="-1">
+                        <img class="img-fluid" src="https://new.axilthemes.com/demo/template/etrade/assets/images/product/categories/elec-4.png" alt="product categorie">
+                        <h6 class="cat-title">Phones</h6>
+                    </a>
+                </div>
+                <!-- End .categrie-product -->
+            </div>
+            <div class="slick-single-layout slick-slide slick-cloned m-auto" tabindex="-1" style="width: 160px;" data-slick-index="-5" aria-hidden="true">
+                <div class="categrie-product">
+                    <a href="/shop/computer" tabindex="-1">
+                        <img class="img-fluid" src="https://new.axilthemes.com/demo/template/etrade/assets/images/product/categories/elec-5.png" alt="product categorie">
+                        <h6 class="cat-title">Computers</h6>
+                    </a>
+                </div>
+                <!-- End .categrie-product -->
+            </div>
+            <div class="slick-single-layout slick-slide slick-cloned m-auto" tabindex="-1" style="width: 160px;" data-slick-index="-5" aria-hidden="true">
+              <div class="categrie-product">
+                  <a href="/shop/accessories" tabindex="-1">
+                      <img class="img-fluid" src="https://new.axilthemes.com/demo/template/etrade/assets/images/product/categories/elec-11.png" alt="product categorie">
+                      <h6 class="cat-title">Accessories</h6>
+                  </a>
+              </div>
+              <!-- End .categrie-product -->
+          </div>
+            <div class="slick-single-layout slick-slide slick-cloned m-auto" tabindex="-1" style="width: 160px;" data-slick-index="-4" aria-hidden="true">
+                <div class="categrie-product">
+                    <a href="/shop/laptop" tabindex="-1">
+                        <img class="img-fluid" src="https://new.axilthemes.com/demo/template/etrade/assets/images/product/categories/elec-6.png" alt="product categorie">
+                        <h6 class="cat-title">Laptops</h6>
+                    </a>
+                </div>
+                <!-- End .categrie-product -->
+            </div><div class="slick-single-layout slick-slide slick-cloned m-auto" tabindex="-1" style="width: 160px;" data-slick-index="-2" aria-hidden="true">
+                <div class="categrie-product">
+                    <a href="/shop/headphone" tabindex="-1">
+                        <img class="img-fluid" src="https://new.axilthemes.com/demo/template/etrade/assets/images/product/categories/elec-9.png" alt="product categorie">
+                        <h6 class="cat-title">Headpones</h6>
+                    </a>
+                </div>
+                <!-- End .categrie-product -->
+            
+            </div></div></div>
+    </div>
+    <hr>
+</div>
+    <div class="container mt-5 d-flex justify-content-between" >
+        <div class="d-flex gap-4">
+            
+            <div class="dropdown">
+                <button class="btn category-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Price Range
+                </button>
+                <ul class="dropdown-menu">
+                    <a href="/smartphone"> <li class="dropdown-item m-0">0 - 100</li></a>
+                    <a href="/laptop"> <li class="dropdown-item m-0">100 - 500</li></a>
+                    <a href="/computer"> <li class="dropdown-item m-0">500 - 10000</li></a>
+                    <a href="/computer"> <li class="dropdown-item m-0">10000 - above</li></a>
+                </ul>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="btn sort-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              sort
+            </button>
+            <ul class="dropdown-menu">
+                <a href="/shop"> <li class="dropdown-item m-0">sort by default</li></a></li>
+                <a href="#"> <li class="dropdown-item m-0">sort by popularity</li></a></li>
+                <a href="/shop/low-to-high"> <li class="dropdown-item m-0">Price : low to high</li></a></li>
+                <a href="/shop/high-to-low"> <li class="dropdown-item m-0">Price : high to low</li></a></li>   
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="shoping-result py-3 ">
+        <div class="container">
+            <h6>showing all <%=product.length%> result</h6>
+        </div>
+       <div class="d-flex flex-wrap container gap-3 py-3">
+             <% if(product.length > 0){ %>
+                <%product.forEach(function(elem){ %>
+                    <a href="/view/<%=elem._id%>" class="m-auto">
+                        <div class="card1" style="max-width: 250px;">
+                            <!-- <a href="/cart/id" class="card1-a"><i class="fa-solid fa-bag-shopping"></i></a> -->
+                          <div class=" _card1_img" style="height:200px; width:200px;">
+                            <img src="<%=elem.photo[0]%>" alt="" class="img">
+                          </div>
+                          <div class="_card1_h4 text-dark"><%=elem.productname%></div>
+                          <div class="_card1_h5">from <%=elem.currentprice%></div>
+                          <div class="_card1_h6 text-dark text-muted"><%=elem.brand%> & more</div>
+                        </div>
+                    </a>
+                   
+                <%})%>
+            <% }else{ %>
+                <div class="container p-0 d-flex justify-content-center flex-column align-items-center py-4">
+                    <img src="../images/no-found-symbol-unsuccessful-search-vecotr-upset-magnifying-glass-cute-not-zoom-icon-suitable-results-oops-page-failure-122786031.jpg" alt="" style="width: 400px; ">
+                    <h5>oop's  No result found</h5>
+                </div>
+             <% } %>
+                  
+       </div>
+    </div>
+
+    <div class="axil-most-sold-product axil-section-gap " style="padding-bottom: 0; padding-top: 30PX;" >
+        <div class="container">
+            <div class="product-area ">
+                <div class="section-title-wrapper section-title-center">
+                    <span class="title-highlighter highlighter-primary"><i class="fas fa-star"></i> Most Sold</span>
+                    <h2 class="title">Most Sold in eTrade Store</h2>
+                </div>
+                <div class="row row-cols-xl-2 mt-5 row-cols-1 row--15">
+                    <div class="col">
+                        <div class="axil-product-list">
+                            <div class="thumbnail">
+                                <a href="single-product.html">
+                                    <img data-sal="zoom-in"  src="https://new.axilthemes.com/demo/template/etrade/assets/images/product/electric/product-11.png" alt="Yantiti Leather Bags" class="sal-animate">
+                                </a>
+                            </div>
+                            <div class="product-content">
+                                <div class="product-rating">
+                                    
+                                    <span class="rating-number"><span>100+</span> Reviews</span>
+                                </div>
+                                <h6 class="product-title"><a href="single-product.html">Media Remote</a></h6>
+                                <div class="product-price-variant">
+                                    <span class="price current-price">$29.99</span>
+                                    <span class="price old-price">$49.99</span>
+                                </div>
+                                <div class="product-cart">
+                                    <a href="cart.html" class="cart-btn"><i class="fa-solid fa-cart-shopping"></i></a>
+                                    <a href="wishlist.html" class="cart-btn"><i class="fa-regular fa-heart"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="axil-product-list">
+                            <div class="thumbnail">
+                                <a href="single-product.html">
+                                    <img data-sal="zoom-in" data-sal-delay="200" data-sal-duration="1500" src="https://new.axilthemes.com/demo/template/etrade/assets/images/product/electric/product-11.png" alt="Yantiti Leather Bags" class="sal-animate">
+                                </a>
+                            </div>
+                            <div class="product-content">
+                                <div class="product-rating">
+                                    
+                                    <span class="rating-number"><span>50+</span> Reviews</span>
+                                </div>
+                                <h6 class="product-title"><a href="single-product.html">HD Camera</a></h6>
+                                <div class="product-price-variant">
+                                    <span class="price current-price">$49.99</span>
+                                </div>
+                                <div class="product-cart">
+                                    <a href="/cart/<%=product._id%>" class="cart-btn"><i class="fa-solid fa-cart-shopping"></i></a>
+                                    <a href="/wishlist/<%=product._id%>" class="cart-btn"><i class="fa-regular fa-heart"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<%- include('partials/subscription.ejs') %>
+<%- include('partials/support.ejs') %>
+<%- include('partials/footer.ejs') %>
