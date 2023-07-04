@@ -520,7 +520,7 @@ const s3Client = new S3Client({
 const upload = multer({
   storage: multerS3({
     s3: s3Client,
-    bucket: 'aakarsh1437',
+    bucket: 'kranti2023',
     key: (req, file, cb) => {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
       cb(null, `uploads/user-uploads/${uniqueSuffix}.${file.originalname.split('.').pop()}`);
@@ -531,7 +531,7 @@ const upload = multer({
 });
 
 router.post("/updatephoto",upload.single('filename'),function(req,res){
-  const imageUrl = `https://aakarsh1437.s3.ap-south-1.amazonaws.com/${req.file.key}`;
+  const imageUrl = `https://kranti2023.s3.ap-south-1.amazonaws.com/${req.file.key}`;
   userModel.findOneAndUpdate({username:req.session.passport.user},{photo:imageUrl}).then(function(){
     res.redirect("back")
   })
@@ -790,7 +790,7 @@ router.get('/sell', function(req, res, next) {
 
 router.post("/sell",upload.single('filename'),function(req,res){
 
-  const imageUrl = `https://aakarsh1437.s3.ap-south-1.amazonaws.com/${req.file.key}`;
+  const imageUrl = `https://kranti2023.s3.ap-south-1.amazonaws.com/${req.file.key}`;
   console.log(imageUrl);
     productModel.create({
       username:req.body.username,
